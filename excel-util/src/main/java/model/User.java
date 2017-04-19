@@ -1,5 +1,8 @@
 package model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import java.math.BigDecimal;
 
 /**
@@ -12,6 +15,15 @@ public class User {
     private String email;
 
     private BigDecimal salary;
+
+    public User() {
+    }
+
+    public User(String name, String email, BigDecimal salary) {
+        this.name = name;
+        this.email = email;
+        this.salary = salary;
+    }
 
     public String getName() {
         return name;
@@ -35,6 +47,11 @@ public class User {
 
     public void setSalary(BigDecimal salary) {
         this.salary = salary;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
 }
