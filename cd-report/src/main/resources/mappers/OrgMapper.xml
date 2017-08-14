@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cd.tech.report.dao.OrgMapper">
+    <!-- 这里namespace必须是UserMapper接口的路径” -->
+    <insert id="insertOrg" parameterType="com.cd.tech.report.model.Org" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_organ(name,area_id,type,contact,telephone,create_time) values(#{name},#{areaId},#{type},#{contact},#{telephone},#{createTime})
+        <!-- 这里sql结尾不能加分号，否则报“ORA-00911”的错误 -->
+    </insert>
+    <insert id="batchInsert" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_organ(name,area_id,type,contact,telephone,create_time) values
+        <foreach item="userList" collection="list" separator=",">
+            (#{item.name},#{item.areaId},#{item.type},#{item.contact},#{item.telephone},#{item.createTime})
+        </foreach>>
+    </insert>
+    <!-- 这里的id必须和UserMapper接口中的接口方法名相同 -->
+    <select id="getOrg" resultType="com.cd.tech.report.model.Org" parameterType="map">
+        select id,area_id from sys_organ where name=#{name} and area_id=#{areaId}
+    </select>
+</mapper>

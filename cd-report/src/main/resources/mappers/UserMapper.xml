@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cd.tech.report.dao.UserMapper">
+    <!-- 这里namespace必须是UserMapper接口的路径” -->
+    <insert id="insertUser" parameterType="com.cd.tech.report.model.User" useGeneratedKeys="true" keyProperty="id">
+        insert into byr_user(real_name,mobile,type,password,is_approved,org_id,create_time) values(#{realName},#{mobile},#{type},#{password},#{isApproved},#{orgId},#{createTime})
+        <!-- 这里sql结尾不能加分号，否则报“ORA-00911”的错误 -->
+    </insert>
+
+    <insert id="batchInsert" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        insert into byr_user(real_name,mobile,type,password,is_approved,org_id,create_time) values
+        <foreach item="userList" collection="list" separator=",">
+          (#{item.realName},#{item.mobile},#{item.type},#{item.password},#{item.isApproved},#{item.orgId},#{item.createTime})
+        </foreach>>
+        <!-- 这里sql结尾不能加分号，否则报“ORA-00911”的错误 -->
+    </insert>
+
+    <!-- 这里的id必须和UserMapper接口中的接口方法名相同 -->
+    <select id="getUser" resultType="com.cd.tech.report.model.User" parameterType="java.lang.String">
+        select * from byr_user where mobile=#{mobile}
+    </select>
+</mapper>
