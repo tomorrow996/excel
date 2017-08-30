@@ -24,7 +24,7 @@ public class StartUp {
             List<String> warnings = new ArrayList<String>();
             boolean overwrite = true;
             //直接获取generatorConfig.xml的文件路径 根据具体情况查看
-            File configFile = new File("D:\\workspace\\cd-report\\src\\main\\resources\\generatorConfig.xml");
+            File configFile = new File("D:\\workspace\\util\\cd-report\\src\\main\\resources\\generatorConfig.xml");
             ConfigurationParser cp = new ConfigurationParser(warnings);
             Configuration config = cp.parseConfiguration(configFile);
             DefaultShellCallback callback = new DefaultShellCallback(overwrite);
